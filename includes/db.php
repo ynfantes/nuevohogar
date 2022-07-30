@@ -592,7 +592,7 @@ Class Misc {
         $entorno['query_string'] = $_SERVER['QUERY_STRING'];
         $entorno['request_uri'] = $_SERVER['REQUEST_URI'];
         $entorno['php_self'] = $_SERVER['PHP_SELF'];
-        $entorno['url_completa'] = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+        $entorno['url_completa'] = "https://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
         // </editor-fold>
 
         $html.= "<pre><b>Server:</b></pre><code>" . misc::dump($entorno) . "</code>";
