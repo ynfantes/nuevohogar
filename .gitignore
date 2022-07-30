@@ -1,0 +1,5 @@
+/.vscode
+/includes/configuracion.php
+/data/*.txt
+/cancelacion.gastos/*.pdf
+/enlinea/avisos/*.pdf
