@@ -1,39 +1,33 @@
 <?php
-// <editor-fold defaultstate="collapsed" desc="configuracion regional">
+
 date_default_timezone_set("America/La_Paz");
-// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="init">
+
 $debug = true;
 $sistema = "/nuevohogar/";
 $email_error = true;
 $mostrar_error = true;
 
-// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="Cheqeuo servidor">
+
+
 if ($_SERVER['SERVER_NAME'] == "www.administradoranuevohogar.com.ve" | $_SERVER['SERVER_NAME'] == "administradoranuevohogar.com.ve") {
-    $user = "nuevohogar_user";
-    $password = "nuevohogar5231";
-    //$db = "sillasde_octagon";
-    $db = "valoriza2_nuevohogar";
+    $user = "";
+    $password = "";
+    $db = "";
     $email_error = true;
     $mostrar_error = false;
     $debug = false;
-    $sistema = "/";
+    //$sistema = "/";
 } else {
     $user = "root";
     $password = "";
-    $db = "valoriza2_nuevohogar";
+    $db = "";
     
 }
 
-// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="Acceso a la BD">
 define("HOST", "localhost");
 define("USER", $user);
 define("PASSWORD", $password);
 define("DB", $db);
-// </editor-fold>
-//<editor-fold defaultstate="collapsed" desc="configuracion de ficheros del sistema">
 define("SISTEMA", $sistema);
 define("EMAIL_ERROR", $email_error);
 define("EMAIL_CONTACTO", "ynfantes@gmail.com");
@@ -80,21 +74,14 @@ if (isset($_SESSION))
 $twig->addExtension(new extensiones());
 $twig->addExtension(new Twig_Extension_Debug());
 
-//</editor-fold>
-//<editor-fold defaultstate="collapsed" desc="autoload">
+spl_autoload_register( function($class) {
+    include_once SERVER_ROOT.'/includes/'.$class.'.php';
+});
 
-function __autoload($clase) {
-    include_once SERVER_ROOT . "/includes/" . $clase . ".php";
-}
-
-spl_autoload_register("__autoload", false);
-//</editor-fold>
-//<editor-fold defaultstate="collapsed" desc="cerrar sesión">
 if (isset($_GET['logout']) && $_GET['logout'] == true) {
     $user_logout = new propietario();
     $user_logout->logout();
 }
-//</editor-fold>
 
 define("NOMBRE_APLICACION","Nuevo Hogar en Línea");
 define("ACTUALIZ","data/");
@@ -109,15 +96,12 @@ define("ARCHIVO_EDO_CTA_INM","EDO_CUENTA_INMUEBLE.txt");
 define("ARCHIVO_CUENTAS_DE_FONDO","CUENTAS_FONDO.txt");
 define("ARCHIVO_MOVIMIENTOS_DE_FONDO","MOVIMIENTO_FONDO.txt");
 define("ARCHIVO_ACTUALIZACION","ACTUALIZACION.txt");
-define("SMTP_SERVER","mail.administradoranuevohogar.com.ve");
+define("SMTP_SERVER","");
 define("PORT",25);
-define("USER_MAIL","info@administradoranuevohogar.com.ve");
-define("PASS_MAIL","nuevohogar5231");
+define("USER_MAIL","");
+define("PASS_MAIL","");
 define("MESES_COBRANZA",4);
 define("GRAFICO_FACTURACION",1);
 define("GRAFICO_COBRANZA",1);
 define("DEMO",0);
 define("MOVIMIENTO_FONDO",1);
-//https://www.google.com/settings/u/1/security/lesssecureapps
-// https://accounts.google.com/DisplayUnlockCaptcha
-//https://security.google.com/settings/security/activity?hl=en&pli=1
