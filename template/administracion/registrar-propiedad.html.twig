@@ -1,0 +1,306 @@
+{% extends 'layout/inmobiliaria.html.twig'%}
+{% block css %}
+{{parent()}}
+<link rel="stylesheet" href="{{ constant('ROOT') }}assets/dropzone/css/dropzone.css?v=1423494334">
+{% endblock %}
+{% block contenido %}
+    <section class="pagetitlewrap">
+<div class="parallaxbg bgwithparallax" data-speed="150" style="background-position: 50% 0px;"></div>
+<div class="bgwithparallax_overlay" style="background-color:#99BC56;"></div>
+
+<div class="row pagetitle">
+<h1 style="">Registre una propiedad</h1>
+<div class="breadcrumbwrap"><a href="http://localhost/nuevohogar/">Inicio</a>&nbsp; &nbsp;/&nbsp; &nbsp;Registre una propiedad</div>
+</div>
+</section>
+<section class="stretchme_on_mobile" style="position:relative" id="firstcontentcontainer">
+ <section class="container">
+	    
+<!-- Body -->
+<section class="row">
+
+    <!-- Content -->
+<section class="span9 right">
+<section class="pagewrapleft">
+
+<div class="vc_row wpb_row vc_row-fluid">
+<div class="wpb_column vc_column_container vc_col-sm-12">
+{% include 'misc/resultado.html.twig' %}
+<div class="wpb_wrapper"><div dir="ltr" id="wpcf7-f4-p2259-o1" class="wpcf7" role="form">
+<div class="screen-reader-response"></div>
+<form novalidate="novalidate" class="wpcf7-form" method="post" action="{{constant('ROOT')}}administracion/?accion=guardar" id="frmRegister">
+<div style="display: none;">
+{% if accion == "editar" %}
+<input type="hidden" name="editar" value="editar">
+{% endif %}
+<input type="hidden" name="id" value="{{propiedad[0].id}}">
+</div>
+<div>
+    <span class="wpcf7-form-control-wrap titulo">
+        <input type="text" placeholder="Título de la publicación" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required required" size="40" name="titulo" value="{{propiedad[0].titulo}}">
+    </span>
+</div>
+<div class="clear"></div>
+<span class="wpcf7-form-control-wrap description">
+    <textarea placeholder="Escriba aquí una descripción de la propiedad" aria-invalid="false" class="wpcf7-form-control wpcf7-textarea" rows="10" cols="40" name="descripcion">{{propiedad[0].descripcion}}</textarea>
+</span>
+<div class="one_third">
+    <span class="wpcf7-form-control-wrap id_inmobiliaria_tipo woocommerce">
+        <select name="id_inmobiliaria_tipo">
+        <option value="1">Tipo Propiedad</option>
+        {% for t in tipo %}
+        <option value="{{t.id}}">{{t.descripcion}}</option>
+        {% endfor %}
+        </select>
+    </span>
+</div>
+<div class="one_third">
+    <span class="wpcf7-form-control-wrap id_operacion woocommerce">
+        <select name="id_operacion">
+        <option value="1">Tipo Operación</option>
+        {% for o in operacion %}
+        <option value="{{o.id}}">{{o.descripcion}}</option>
+        {% endfor %}
+        </select>
+    </span>
+</div>
+<div class="one_third lastcolumn">
+    <span class="wpcf7-form-control-wrap your-subject">
+        <input type="text" placeholder="Metros Cuadrados" aria-invalid="false" class="wpcf7-form-control wpcf7-text" size="40" value="" name="mts2" value="{{propiedad[0].mts2}}">
+    </span>
+</div>
+<div class="one_third">
+    <span class="wpcf7-form-control-wrap id_ciudad woocommerce">
+        <select name="id_ciudad">
+        <option value="2" selected="selected">Vargas</option>
+        </select>
+    </span>
+</div>
+<div class="one_third">
+    <span class="wpcf7-form-control-wrap id_municipio woocommerce">
+        <select name="id_municipio">
+        <option value="1">Municipio</option>
+        {% for municipio in municipios %}
+        <option value="{{municipio.id}}">{{municipio.descripcion}}</option>
+        {% endfor %}    
+        </select>
+    </span>
+</div>
+<div class="one_third lastcolumn">
+    <span class="wpcf7-form-control-wrap your-subject">
+        <input type="text" placeholder="Zona o Sector" aria-invalid="false" class="wpcf7-form-control wpcf7-text" size="40" value="" name="zona" value="{{propiedad[0].zona}}">
+    </span>
+</div>
+<div class="one_fourth">
+<span class="wpcf7-form-control-wrap habitaciones woocommerce">
+    <input type="text" placeholder="Número Habitaciones" aria-invalid="false" class="wpcf7-form-control wpcf7-text" size="40" value="" name="habitaciones" value="{{propiedad[0].habitaciones}}">
+</span>
+</div>
+<div class="one_fourth">
+    <span class="wpcf7-form-control-wrap id_municipio woocommerce">
+        <input type="text" placeholder="Baños" aria-invalid="false" class="wpcf7-form-control wpcf7-text" size="40" value="" name="baños" value="{{propiedad[0].baños}}">
+    </span>
+</div>
+<div class="one_fourth">
+    <span class="wpcf7-form-control-wrap id_municipio woocommerce">
+        <input type="text" placeholder="Puestos Est." aria-invalid="false" class="wpcf7-form-control wpcf7-text" size="40" value="" name="puestos_estacionamiento" value="{{propiedad[0].puestos_estacionamiento}}">
+    </span>
+</div>
+<div class="one_fourth lastcolumn">
+    <span class="wpcf7-form-control-wrap your-subject">
+        <input type="text" placeholder="Maleteros" aria-invalid="false" class="wpcf7-form-control wpcf7-text" size="40" value="" name="maleteros" value="{{propiedad[0].maleteros}}">
+    </span>
+</div>
+   
+    <div style="float: left; width: 100%">
+        <div class="row dropzone dz-clickable centered" id="previews">
+        <div id="carga_imagenes">
+            <div class="dz-message">
+    Arraste las imágenes hasta aquí o haga click.<br>
+    <span class="note">&nbsp;</span>
+  </div>
+        </div>
+        <div style="display: none;" id="template">
+    
+    <div class="dz-preview dz-file-preview">
+      <div class="dz-image"><img data-dz-thumbnail=""></div>
+
+      <div class="dz-details">
+        <div class="dz-size"><span data-dz-size=""></span></div>
+        <div class="dz-filename"><span data-dz-name=""></span></div>
+      </div>
+      <div class="dz-progress"><span data-dz-uploadprogress="" class="dz-upload"></span></div>
+      <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
+
+
+
+      <div class="dz-success-mark">
+
+        <svg xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 54 54" height="54px" width="54px">
+          <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+          <title>Check</title>
+          <desc>Created with Sketch.</desc>
+          <defs/>
+          <g sketch:type="MSPage" fill-rule="evenodd" fill="none" stroke-width="1" stroke="none" id="Page-1">
+              <path sketch:type="MSShapeGroup" fill="#FFFFFF" fill-opacity="0.816519475" stroke="#747474" stroke-opacity="0.198794158" id="Oval-2" d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z"/>
+          </g>
+        </svg>
+      
+      </div>
+      <div class="dz-error-mark">
+
+        <svg xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 54 54" height="54px" width="54px">
+            <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+            <title>error</title>
+            <desc>Created with Sketch.</desc>
+            <defs/>
+            <g sketch:type="MSPage" fill-rule="evenodd" fill="none" stroke-width="1" stroke="none" id="Page-1">
+                <g fill-opacity="0.816519475" fill="#FFFFFF" stroke-opacity="0.198794158" stroke="#747474" sketch:type="MSLayerGroup" id="Check-+-Oval-2">
+                    <path sketch:type="MSShapeGroup" id="Oval-2" d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z"/>
+                </g>
+            </g>
+        </svg>
+
+      </div>
+
+
+    </div>
+  </div>
+            </div>
+    </div>
+<div class="top10"></div>
+<div class="centered"><input type="submit" class="wpcf7-form-control wpcf7-submit btn formbtnstyle" value="Publicar"><img class="ajax-loader" src="http://velocity.themepunch.com/wp-content/plugins/contact-form-7/images/ajax-loader.gif" alt="Enviando ..." style="visibility: hidden;"></div>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div></div></div>
+
+
+<!-- Content End -->
+</section>
+</section>
+        <!--
+    #####################
+        -	SIDEBAR	-
+    #####################
+    -->
+    <aside style="margin-top: 0px !important;" class="span3 right sidebar">
+        <section class="row">
+<div class="widget-1  first span3 widget widget_nav_menu" id="nav_menu-3">
+    <div class="menu-elements-container">
+        <ul class="menu" id="menu-elements">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page" id="menu-item-3071"><a href="{{constant('ROOT')}}administracion/?accion=publicaciones" class="menu-link ">« Volver al listado de Publicaciones</a>
+                <div class="clear"></div>
+            </li>
+
+</ul></div><div class="clear"></div></div>
+            
+        </section>
+    </aside>
+    <!-- /Sidebar -->
+    
+</section><div class="clear"></div>
+<!-- /Body -->
+
+<!-- Bottom Spacing -->
+<div class="row top50"></div>
+ </section><!-- /container -->
+</section>
+
+{% endblock %}
+{% block js %}
+{{parent()}}
+<script src="{{ constant('ROOT') }}assets/dropzone/js/dropzone.js"></script>
+<script type="text/javascript">
+var previewNode = document.querySelector("#template");
+previewNode.id = "";
+var previewTemplate = previewNode.parentNode.innerHTML;
+previewNode.parentNode.removeChild(previewNode);
+
+var myDropzone = new Dropzone(document.body, {
+    url: "{{constant('ROOT')}}images/prv/estate/index.php",
+    previewsContainer: "#previews",
+    maxFilesize: 2,
+    /*maxFiles:10,*/
+    acceptedFiles:"image/*",
+    paramName:"file",
+    /*addRemoveLinks: true ,
+    dictRemoveFile: "Eliminar imagen",*/
+    init:function() {
+        jQuery.getJSON('{{constant('ROOT')}}images/prv/estate/index.php?id={{propiedad[0].id}}', function(data) {
+            jQuery.each(data, function(index, val) {
+              var mockFile = { name: val.name, size: val.size };
+              myDropzone.options.addedfile.call(myDropzone, mockFile);
+              myDropzone.options.thumbnail.call(myDropzone, mockFile, "{{constant('ROOT')}}images/prv/estate/" + val.name);
+              myDropzone.emit("complete", mockFile);
+              var inputDesc = Dropzone.createElement("<input name='imagen[]' type='hidden' value='" + val.name + "'>");
+              mockFile.previewElement.appendChild(inputDesc);
+              mockFile.previewElement.addEventListener("click", function() {
+                myDropzone.removeFile(mockFile);
+               });
+            });
+          });
+
+    }
+});
+
+myDropzone.on("addedfile", function(file) {
+  var inputDesc = Dropzone.createElement("<input name='imagen[]' type='hidden' value='" + file.name + "'>");
+  file.previewElement.appendChild(inputDesc);
+  file.previewElement.addEventListener("click", function() {
+        myDropzone.removeFile(file);
+  });
+});
+jQuery(function($) {
+    jQuery(document).on('click', '.form-footer > p > a[data-target]', function(e) {
+        e.preventDefault();
+        var target = $(this).data('target');
+        //console.log(target);
+        jQuery('.wp-block.visible').removeClass('visible');//hide others
+        jQuery(target).addClass('visible');//show target
+    });
+});
+jQuery('select[name="id_operacion"] > option[value="{{propiedad[0].id_operacion}}"]').attr('selected', 'selected');
+jQuery('select[name="id_municipio"] > option[value="{{propiedad[0].id_municipio}}"]').attr('selected', 'selected');
+jQuery('select[name="id_inmobiliaria_tipo"] > option[value="{{propiedad[0].id_inmobiliaria_tipo}}"]').attr('selected', 'selected');
+
+jQuery.validator.addMethod("valueNotEquals", function(value, element, arg){
+  return arg != value;
+ }, "Seleccione un elemento de la lista");
+ 
+jQuery("#frmRegister").validate({
+    rules:{
+        titulo: { required:true },
+        descripcion : {required:true },
+        id_inmobiliaria_tipo: { valueNotEquals: "1" },
+        id_operacion: { valueNotEquals: "1" },
+        id_municipio: { valueNotEquals: "1" },
+        mts2: {
+            required:true,
+            number:true
+        },
+        zona: {required:true},
+        habitaciones: {
+            required:true,
+            number:true
+        },
+        baños: {
+            required:true,
+            number:true
+        },
+        puestos_estacionamiento: {
+            required:true,
+            number:true
+        },
+        maleteros: {
+            required:true,
+            number:true
+        }
+    },
+    messages:{
+        titulo: { required: "Ingrese el título de la publicación" },
+        descripcion: {required:"Falta la descripción" },
+        zona:{required:"Esta información es requerida"},
+        maleteros: {required:"Indique la cantidad de maleteros",number:"Ingrese una cantidad"},
+        mts2:{required:"Esta información es requerida", number:"Debe ingresar un número"}
+       }
+});
+</script>
+{% endblock %}

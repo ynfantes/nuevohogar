@@ -1,0 +1,78 @@
+{% extends 'layout/inmobiliaria.html.twig'%}
+{% block contenido %}
+<section class="stretchme_on_mobile" style="position:relative" id="firstcontentcontainer">
+<div class="container">
+<div class="row">
+<div class="span9 left">
+{% include 'misc/resultado.html.twig' %}
+<!-- PROPERTY LISTING -->
+{% if listado %}
+{% for propiedad in listado %}
+<div class="row span homeposts">
+<div class="col-md-12">
+<div class="wp-block property list">
+    <div class="wp-block-title">
+        <h3 class="content-title"><a href="{{constant('ROOT')}}inmobiliaria/propiedad/{{propiedad.id}}.html" hidefocus="true">{{ propiedad.titulo }}</a></h3>
+    </div>
+    <div class="wp-block-body">
+        <div class="wp-block-img">
+            <div class="wpb_column vc_column_container vc_col-sm-4">
+            <a href="{{constant('ROOT')}}inmobiliaria/propiedad/{{propiedad.id}}.html" hidefocus="true">
+                <img src="{{ constant('ROOT') }}{{propiedad.imagen}}" alt="">
+            </a>
+            <small><i class="fa fa-map-marker"></i> Municipio {{ propiedad.municipio}}, {{propiedad.zona}}</small>
+            </div>
+        </div>
+        <div class="wpb_column vc_column_container vc_col-sm-8 wp-block-content clearfix">
+            <h4 class="content-title">{{propiedad.Tipo}}, {{propiedad.operacion}}</h4>
+            <p class="description">{{ propiedad.descripcion }}</p>
+            <span class="pull-left">
+                <a class="btn btn-b-base" href="{{constant('ROOT')}}administracion/?accion=editar&id={{propiedad.id}}">Editar</a>
+                <a class="btn btn-b-base" href="{{constant('ROOT')}}administracion/?accion=inactivar&id={{propiedad.id}}">Inactivar</a>
+            </span>
+            <span class="pull-right">
+                <p>Visto: {{propiedad.visto}} veces</p>
+            </span>
+        </div>
+    </div>
+    <div class="wp-block-footer">
+        <ul class="aux-info">
+            <li><i class="fa fa-building"></i>{{ propiedad.mts2 }} Mts2</li>
+            <li><i class="fa fa-user"></i> {{propiedad.habitaciones}} Habitaciones</li>
+            <li><i class="fa fa-tint"></i> {{propiedad.baños }} Baño</li>
+            <li><i class="fa fa-car"></i> {{propiedad.puestos_estacionamiento}} Estacionamiento</li>
+            <li><i class="fa fa-briefcase"></i> {{propiedad.maleteros}} Maletero</li>
+
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+{% endfor %}
+{% else %}
+<div class="box-element base-alt">
+<div class="row">
+    <div class="col-md-10">
+        <h1>
+            No existen propiedades publicadas.
+        </h1>
+    </div>
+    <div class="col-md-2" style="font-size: 64px; text-align: right">
+        <i class="fa fa-building-o"></i>
+    </div>
+</div>
+</div>
+{% endif %}
+</div>
+<aside class="span3 right" style="margin-top: 0px !important">
+    <a class="btn btn-lg btn-b-base btn-icon btn-icon-right btn-check" href="{{constant('ROOT')}}administracion/?accion=publicar">
+    <span>Nueva Publicación</span>
+</a>
+</aside>
+</div>
+</div>
+</section>
+{% endblock %}
+{% block js %}
+{{parent()}}
+{% endblock %}

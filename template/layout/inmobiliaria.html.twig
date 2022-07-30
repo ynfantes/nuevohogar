@@ -1,0 +1,113 @@
+{% extends 'layout/base.html.twig'%}
+{% block titulo 'Propiedades e inmuebles en Caracas ' %}
+{% block seo %}
+<meta name="description" content="Propiedades e inmuebles en Caracas">
+{% endblock %}
+{% block css %}
+{{parent()}}
+{% endblock %}
+{% block contenido %}
+<section class="pagetitlewrap">
+<div data-speed="150" class="parallaxbg bgwithparallax"></div>
+<div style="background-color:#99BC56;" class="bgwithparallax_overlay"></div>
+
+<div class="row pagetitle">
+<h1 style="">Area de administración</h1>
+<div class="breadcrumbwrap"><a href="{{constant('ROOT')}}">Inicio</a>&nbsp; &nbsp;/&nbsp; &nbsp;Administración</div>
+</div>
+</section>
+<section class="stretchme_on_mobile" style="position:relative" id="firstcontentcontainer">
+<section class="container">
+
+<!-- Body -->
+<section class="row">
+
+<!-- Google Map -->
+
+
+
+<!-- Content -->
+<section class="span12">
+
+<div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="wpb_wrapper">
+<div class="wpb_text_column wpb_content_element  centered">
+<div class="wpb_wrapper">
+<h2>Solo personal autorizado</h2>
+
+</div>
+</div>
+</div></div></div><div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-6"><div class="wpb_wrapper">
+<div class="wpb_raw_code wpb_content_element wpb_raw_html">
+<div class="wpb_wrapper">
+<div class="contenttable">
+<table>
+<tbody>
+<tr>
+<td><strong>Dirección:</strong></td>
+<td>Av. Ppal de Playa Grande. Catia La Mar</td>
+</tr>
+<tr>
+<td><strong>Teléfono:</strong></td>
+<td>(0212) 735 1320</td>
+</tr>
+<tr>
+<td><strong>Celular:</strong></td>
+<td>(0414) 262 4817</td>
+</tr>
+<tr>
+<td><strong>Email:</strong></td>
+<td><a href="mailto:info@administradoranuevohogar.com.ve">info@administradoranuevohogar.comm.ve</a></td>
+</tr>
+<tr>
+<td><strong>Horario de Oficina:</strong></td>
+<td>Lun. - Vie.: 08:00 - 17:00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div></div><div class="wpb_column vc_column_container vc_col-sm-6"><div class="wpb_wrapper">
+<div class="wpb_text_column wpb_content_element ">
+<div class="wpb_wrapper">
+<form id="contacto" method="post" role="form" class="form-light" novalidate="novalidate" action="{{constant('ROOT')}}administracion/?accion=login">
+<input type="text" id="usuario" name="usuario" hidefocus="true" class="form-control" placeholder="Nombre Usuario">
+<input type="text" id="password" name="password" hidefocus="true" class="form-control" placeholder="Password">
+
+{% if administrador.error is defined %}
+<div class="alert alert-danger">
+<a href="#" class="close">&times;</a>
+<p style="color:#8a6d3b">{{ administrador.error|raw }}</p>
+</div>
+{% endif %} 
+
+<div class="clear"></div>
+<button class="btn btn-base btn-icon btn-icon-right btn-send" type="submit">
+<span>Enviar</span>
+</button>
+</form>
+
+</div>
+</div>
+</div></div></div>
+
+<!-- Content End -->
+</section>
+
+
+</section><div class="clear"></div>
+<!-- /Body -->
+
+<!-- Bottom Spacing -->
+<div class="row top80"></div>
+</section><!-- /container -->
+</section>
+{% endblock %}
+{% block js %}
+{{ parent() }}
+<script type="text/javascript">
+jQuery(document).ready(function(){
+
+});
+</script>
+{% endblock %}

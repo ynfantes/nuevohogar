@@ -1,0 +1,220 @@
+{% extends 'layout/base.html.twig'%}
+{% block contenido %}
+<!--article class="gmap"><div id="gmap_inner"></div></article-->
+<!--article class="gmapheight"></article-->
+<section class="stretchme_on_mobile" style="position:relative" id="firstcontentcontainer">
+<section class="container">
+<!-- Body -->
+<section class="row">
+<!-- Content -->
+<section class="span12">
+<div class="vc_row wpb_row vc_row-fluid">
+<div class="vc_col-sm-12 wpb_column vc_column_container ">
+<div class="wpb_wrapper">
+<div class="wpb_text_column wpb_content_element  centered">
+<div class="wpb_wrapper">
+<h2>Como contactar con nosotros</h2>
+</div> 
+</div> 
+</div> 
+</div> 
+</div>	<div class="vc_row wpb_row vc_row-fluid">
+<div class="vc_col-sm-6 wpb_column vc_column_container ">
+<div class="wpb_wrapper">
+
+<div class="wpb_raw_code wpb_content_element wpb_raw_html">
+<div class="wpb_wrapper">
+<div class="contenttable">
+<table>
+<tbody>
+<tr>
+<td><strong>Dirección:</strong></td>
+<td>Av. Principal de Playa Grande, manzana Q.</td>
+</tr>
+<tr>
+<td> </td>
+<td>Centro Deportivo Ariel. Local 1. Urb. Playa Grande</td>
+</tr>
+<tr>
+<td> </td>
+<td>Catia La Mar, Estado Vargas.</td>
+</tr>
+<tr>
+<td><strong>Teléfonos:</strong></td>
+<td>(0212) 735 1320</td>
+</tr>
+<tr>
+<td> </td>
+<td>(0414) 262 4817</td>
+</tr>
+<!--tr>
+<td> </td>
+<td>(0414) 111 3849</td>
+</tr-->
+<tr>
+<td> </td>
+<td>(0424) 250 5344</td>
+</tr>
+<td><strong>Email:</strong></td>
+<td><a href="mailto:info@administradoranuevohogar.com.ve">info@administradoranuevohogar.com.ve</a></td>
+</tr>
+<tr>
+<td><strong>Horario de Trabajo:</strong></td>
+<td>Lun. - Vie.: 08:00am - 12:00pm</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>Lun. - Vie.: 02:00pm - 05:00pm</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div> 
+</div> 
+</div> 
+</div> 
+<div class="vc_col-sm-6 wpb_column vc_column_container ">
+<div class="wpb_wrapper">
+<div class="wpcf7" id="wpcf7-f4-p498-o1" dir="ltr">
+<div class="screen-reader-response"></div>
+<form name="contacto" class="wpcf7-form" novalidate="novalidate" action="post">
+<div class="one_third">
+    <span class="wpcf7-form-control-wrap name">
+        <input type="text" name="name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Nombres y Apellido *">
+    </span>
+</div>
+<div class="one_third">
+    <span class="wpcf7-form-control-wrap email">
+        <input type="email" name="email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Correo electrónico *">
+    </span>
+</div>
+<div class="one_third lastcolumn">
+    <span class="wpcf7-form-control-wrap subject">
+        <input type="text" name="subject" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="Asunto *">
+    </span>
+</div>
+<div class="clear"></div>
+<span class="wpcf7-form-control-wrap message">
+    <textarea name="message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false" placeholder="Escriba aquí su mensaje"></textarea>
+</span><p></p>
+<div class="top10"></div>
+<div class="centered">
+<input type="submit" value="Enviar mensaje" class="wpcf7-form-control wpcf7-submit btn formbtnstyle"><img class="ajax-loader" style="visibility: hidden;"><img style="visibility: hidden;" alt="Enviando ..." src="{{constant('ROOT')}}plugins/contact-form-7/images/ajax-loader.gif" class="ajax-loader">
+</div>
+<div class="wpcf7-response-output wpcf7-display-none"></div>
+</form>
+<div id="dialog-contacto-resultado" class="alert hidden"></div>
+</div>
+</div> 
+</div> 
+</div>	
+<!-- Content End -->
+</section>
+</section>
+<!-- /Body -->
+</section><!-- /container -->
+</section>
+{% endblock %}
+{% block js %}
+{{ parent()}}
+<script type="text/javascript">
+jQuery(document).ready(function() {
+jQuery(".menu-item").removeClass("current-menu-item page_item");
+jQuery(".contacto").addClass("current-menu-item page_item ");
+});
+</script>
+<script src="{{constant('ROOT')}}js/jquery/jquery.validate.js" type="text/javascript"></script>
+<!--script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script-->
+<!--script src="{{constant('ROOT')}}themes/velocity/js/jquery.gmap.js" type="text/javascript"></script-->
+<script>
+jQuery(window).load(function(){
+//set google map with marker
+/*jQuery("#gmap_inner").gMap({
+scrollwheel: false,
+latitude: 10.484328,
+longitude: -66.851850,
+markers: [{
+latitude: 10.484328,
+longitude: -66.851850,
+html: '<h4>Administradora Vick & Ann</h4>Edificio General de Seguros, Piso 1, Oficina C. Chuao - Caracas',
+popup: true
+}],
+zoom: 14
+});*/
+
+if(jQuery("form[name=contacto]").length>0) {
+    jQuery("form[name=contacto]").validate({
+        submitHandler: function(form) {
+            jQuery.ajax({
+                type: "POST",
+                url: "includes/json.php?accion=email_contacto",
+                data: {
+                    "nombre": jQuery("input[name=name]").val(),
+                    "email": jQuery("input[name=email]").val(),
+                    "asunto": jQuery("input[name=subject]").val(),
+                    "mensaje": jQuery("textarea[name=message]").val()
+                },
+                success: function(data) {
+                    console.log(data);
+                    jQuery("#dialog-contacto-resultado").removeClass("alert-danger").addClass(" alert-success");
+                    jQuery("#dialog-contacto-resultado").html(data);
+                    jQuery("#dialog-contacto-resultado").fadeIn();
+                },
+                error: function(data) {
+                    console.log(data);
+                    jQuery("#dialog-contacto-resultado").removeClass(" alert-success").addClass("alert-danger");
+                    jQuery("#dialog-contacto-resultado").fadeIn();
+                }
+            });
+        },				
+        // debug: true,
+        errorPlacement: function(error, element) {
+                error.insertAfter( element );
+        },
+        onkeyup: false,
+        onclick: false,
+        rules: {
+            name: {
+                required: true,
+                minlength: 2
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            subject: {
+                required: true
+            },
+            message: {
+                required: true,
+                minlength: 10
+            }
+        },
+        messages: {
+            name: {
+                required: "Por favor escriba su nombre",
+                minlength: "Verifique su nombre"
+            },
+            email: {
+                required: "Este valor es requerido",
+                email: "Correo no válido"
+            },
+            subject: {
+                required: "Asunto es requerido"
+            },
+            message: {
+                required: "Por favor ingrese un mensaje",
+                minlength: "El mensaje debe ser mayor a 10 caracteres"
+            }					
+        },
+        errorElement: "span",
+        errorClass: "wpcf7-not-valid-tip",
+        highlight: function (element) {
+            jQuery(element).parent().removeClass("has-success").addClass("has-error");
+            //jQuery(element).siblings("label").addClass("hide"); 
+        }
+    });
+};
+});
+</script>
+{% endblock %}

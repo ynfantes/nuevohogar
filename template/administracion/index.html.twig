@@ -1,0 +1,15 @@
+{% extends 'layout/inmobiliaria.html.twig'%}
+{% block js %}
+{{parent()}}
+<script type="text/javascript">
+jQuery(function($) {
+    $(document).on('click', '.form-footer > p > a[data-target]', function(e) {
+        e.preventDefault();
+        var target = $(this).data('target');
+        //console.log(target);
+        $('.wp-block.visible').removeClass('visible');//hide others
+        $(target).addClass('visible');//show target
+    });
+});
+</script>
+{% endblock %}

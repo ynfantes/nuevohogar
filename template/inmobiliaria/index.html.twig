@@ -1,0 +1,182 @@
+{% extends 'layout/base.html.twig'%}
+{% block titulo 'Propiedades e inmuebles en Caracas ' %}
+{% block seo %}
+<meta name="description" content="Propiedades e inmuebles en Caracas">
+{% endblock %}
+{% block contenido %}
+<section class="pagetitlewrap">
+<div data-speed="150" class="parallaxbg bgwithparallax"></div>
+<div style="background-color:#99BC56;" class="bgwithparallax_overlay"></div>
+
+<div class="row pagetitle">
+<h1 style="">Lista de propiedades e inmuebles</h1>
+<div class="breadcrumbwrap"><a href="{{constant('ROOT')}}">Inicio</a>&nbsp; &nbsp;/&nbsp; &nbsp;Inmobiliaria</div>
+</div>
+</section>
+<section id="firstcontentcontainer" style="position:relative" class="stretchme_on_mobile">
+<section class="container">
+<section class="row">
+    <section class="span9 left" style="margin-bottom: 40px">
+<section class="wpb_wrapper pagewrapright">
+    <!-- PAGINATION & FILTERS -->
+    {% if num_pages > 0 %}
+    <div class="pagination">
+        <ul>
+            <li><a href="#" hidefocus="true">«</a></li>
+            {% for p in 1..num_pages %}
+            <li {%if p == pagina %}class="active"{% endif %}><a href="{{ constant('ROOT') }}inmobiliaria/publicaciones-pagina-{{p}}.html" hidefocus="true">{{ p }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+<!-- PROPERTY LISTING -->
+    {% if listado %}
+    {% for propiedad in listado %}
+    <div class="row span homeposts">
+        <div class="col-md-12">
+            <div class="lastcolumn">
+                <div class="wp-block property list">
+                <div class="wp-block-title">
+                    <h3><a href="{{constant('ROOT')}}inmobiliaria/propiedad/{{propiedad.id}}.html" hidefocus="true">{{ propiedad.titulo }}</a></h3>
+                </div>
+                <div class="wp-block-body">
+                    <div class="wpb_column vc_column_container vc_col-sm-4">
+                        <a href="{{constant('ROOT')}}inmobiliaria/propiedad/{{propiedad.id}}.html" hidefocus="true">
+                            <img src="{{ constant('ROOT') }}{{propiedad.imagen}}" alt="">
+                        </a>
+                        <small><i class="fa fa-map-marker"></i> Municipio {{ propiedad.municipio}}, {{propiedad.zona}}</small>
+                    </div>
+                    <div class="wpb_column vc_column_container vc_col-sm-8 wp-block-content clearfix">
+                    <h4 class="content-title">{{propiedad.Tipo}}, {{propiedad.operacion}}</h4>
+                    <p class="description">{{ propiedad.descripcion }}</p>
+                    <span class="pull-left">
+                        <a class="btn btn-b-dark" href="#">Llamar (0212)735 1320 &bullet; (0414)262 4817 </a>
+                    </span>
+                    </div>
+                    
+                </div>
+                <div class="wp-block-footer">
+                    <ul class="aux-info">
+                        <li><i class="fa fa-building"></i>{{ propiedad.mts2 }} Mts2</li>
+                        <li><i class="fa fa-user"></i> {{propiedad.habitaciones}} Habitacione(s)</li>
+                        <li><i class="fa fa-tint"></i> {{propiedad.baños }} Baño(s)</li>
+                        <li><i class="fa fa-car"></i> {{propiedad.puestos_estacionamiento}} Estacionamiento(s)</li>
+                        <li class=""><i class="fa fa-briefcase"></i> {{propiedad.maleteros}} Maletero(s)</li>
+
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-danger fade in">
+        <h4>No existen propiedades publicadas.</h4>
+    </div>
+    {% endif %}
+</section>
+</section>
+<aside class="span3 right sidebar" style="margin-top: 0px !important">
+    <section class="row">
+        <!-- FILTERS -->
+        <div class="widget-1  first span3 widget">
+            <div class="footertitle"><h4>Refinar búsqueda</h4></div>
+            <div class="widget_projects">
+                <form class="woocommerce" role="form" action="{{constant('ROOT')}}inmobiliaria/" method="POST">
+                        <label>Municipio</label>
+                        <select class="form-control" name="id_municipio">
+                            <option value="1">Todas los municipios</option>
+                            {% for municipio in municipios %}
+                            <option value="{{municipio.id}}">{{municipio.descripcion}}</option>
+                            {% endfor %}  
+                        </select>
+                        <label>Tipo de Propiedad</label>
+                        <select class="form-control" name="id_inmobiliaria_tipo">
+                            <option value="1">Todas las propieadades</option>
+                            {% for t in tipo %}
+                            <option value="{{t.id}}">{{t.descripcion}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Tipo de Operación</label>
+                        <select class="form-control" name="id_operacion">
+                            <option value="1">Todas las operaciones</option>
+                            {% for op in operaciones %}
+                                <option value="{{op.id}}">{{op.descripcion}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Habitaciones</label>
+                        <select class="form-control" name="habitaciones">
+                            <option value="1">--</option>
+                            <option value="2">1</option>
+                            <option value="3">2</option>
+                            <option value="4">3</option>
+                            <option value="5">4</option>
+                            <option value="6">5</option>
+                        </select>
+
+                    <!--div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Min area</label>
+                                <input type="text" class="form-control" placeholder="" hidefocus="true">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Max area</label>
+                                <input type="text" class="form-control" placeholder="" hidefocus="true">
+                            </div>
+                        </div>
+                    </div-->   
+                    <button type="submit" class="btn btn-base btn-icon btn-icon-right btn-search">
+                        <span>Búscar</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- RECENTLY VIEWED -->
+        <div class="widget-2 span3 widget velocitySocials">
+            <div class="footertitle"><h4>Lo más visto</h4></div>
+            <div class="widget_projects">
+                <ul class="featured featured-vertical">
+                    {% for propiedad in mas_visto %}
+                    <li>
+                        <img src="{{ constant('ROOT') }}{{propiedad.imagen}}" alt="">
+                        <div class="featured-content">
+                            <h3 class="title">
+                                <a href="{{constant('ROOT')}}inmobiliaria/propiedad/{{propiedad.id}}.html" hidefocus="true">{{propiedad.titulo}}</a>
+                            </h3>
+                            <!--div title="Rated 5 out of 5" class="star-rating"><span style="width:100%"><strong class="rating">5</strong> out of 5</span></div-->
+                            <div class="table no-margin">
+                                <div class="price-wr width-50">
+                                    <span class="price">{{propiedad.municipio}}</span>
+                                    <span class="period">{{propiedad.zona}}</span>
+                                </div>
+                            </div>
+                        </div> 
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+</aside>
+</section>
+</section>
+</section>
+{% endblock %}
+{% block js %}
+{{ parent() }}
+<script type="text/javascript">
+jQuery(document).ready(function(){
+jQuery('select[name="id_municipio"] > option[value="{{data.id_municipio}}"]').attr('selected', 'selected');
+jQuery('select[name="id_operacion"] > option[value="{{data.id_operacion}}"]').attr('selected', 'selected');
+jQuery('select[name="id_inmobiliaria_tipo"] > option[value="{{data.id_inmobiliaria_tipo}}"]').attr('selected', 'selected');
+jQuery('select[name="habitaciones"] > option[value="{{data.habitaciones}}"]').attr('selected', 'selected');
+jQuery(".menu-item").removeClass("current-menu-item page_item");
+jQuery(".inmobiliaria").addClass("current-menu-item page_item ");
+});
+</script>
+{% endblock %}
