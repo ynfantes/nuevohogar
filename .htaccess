@@ -4,7 +4,7 @@ Options +FollowSymLinks
 RewriteEngine on
 
 RewriteCond %{HTTP_HOST} ^administradoranuevohogar.com.ve
-RewriteRule (.*) https://www.administradoranuevohogar.com.ve/$1 [R=301,L]
+RewriteRule (.*) http://www.administradoranuevohogar.com.ve/$1 [R=301,L]
 
 Rewriterule ^([A-Za-z\-]+).html$ index.php?accion=$1 [L]
 Rewriterule ^enlinea/([A-Za-z\-]+)/([A-Za-z\-]+)$ enlinea/$1/index.php?accion=$2 [L]
