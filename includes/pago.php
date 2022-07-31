@@ -372,4 +372,17 @@ class pago extends db implements crud {
     public function listarPagosEmailRegisroNoEnviado() {
         return $this->select("*", self::tabla, Array("estatus"=>'p',"enviado"=>0));
     }
+
+    public function cancelacionExisteEnBaseDeDatos($cancelacion) {
+        $cancelacion = str_replace(".pdf","",$cancelacion);
+        $query = "select numero_factura from cancelacion_gastos where numero_factura='".$cancelacion."'";
+        $r=0;
+        $result = $this->dame_query($query);
+        if ($result['suceed']==true) {
+            if (count($result['data'])>0) {
+                $r=1;
+            }
+        }
+        return $r;       
+    }
 }
