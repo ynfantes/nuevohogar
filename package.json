@@ -1,0 +1,29 @@
+{
+  "name": "nuevohogar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "version": "conventional-changelog -i CHANGELOG.md -s && git add CHANGELOG.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ynfantes/nuevohogar.git"
+  },
+  "keywords": [
+    "administracion",
+    "condominio",
+    "administradora",
+    "condominios"
+  ],
+  "author": "pronet21.com.ve",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ynfantes/nuevohogar/issues"
+  },
+  "homepage": "https://github.com/ynfantes/nuevohogar#readme",
+  "dependencies": {
+    "conventional-changelog-cli": "^2.2.2"
+  }
+}

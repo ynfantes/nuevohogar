@@ -3,3 +3,7 @@
 /data/*.txt
 /cancelacion.gastos/*.pdf
 /enlinea/avisos/*.pdf
+/DB
+/enlinea/prerecibo/*.pdf
+.htaccess
+/node_modules
