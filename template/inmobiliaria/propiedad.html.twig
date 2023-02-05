@@ -45,34 +45,24 @@ Ha ocurrido un error durante el proceso y no podemos mostrar la información de 
 <section class="wpb_wrapper pagewrapright">
 <div class="vc_row wpb_row vc_row-fluid product">
 <div class="wpb_column vc_column_container vc_col-sm-3">
-<div class="wpb_wrapper">
-<div class="wpb_text_column wpb_content_element ">
-<div class="wpb_wrapper">
-<div class="images">
-<a data-rel="prettyPhoto" title="" class="woocommerce-main-image zoom" itemprop="image" href="{{ constant('ROOT')}}{{propiedad[0].imagen}}"><img width="880" height="880" sizes="(max-width: 880px) 100vw, 880px" srcset="{{ constant('ROOT')}}{{propiedad[0].imagen}} 880w, {{ constant('ROOT')}}{{propiedad[0].imagen}} 150w, {{ constant('ROOT')}}{{propiedad[0].imagen}} 300w, {{ constant('ROOT')}}{{propiedad[0].imagen}} 90w, {{ constant('ROOT')}}{{propiedad[0].imagen}} 520w" title="{{propiedad[0].titulo}}" alt="{{propiedad[0].titulo}}" class="attachment-shop_single size-shop_single wp-post-image" src="{{ constant('ROOT')}}{{propiedad[0].imagen}}"></a>
-</div>   
-<div class="widget_projects">
-    <div class="footertitle"><h4>Foto Galería</h4></div>
-<!--div class="primary-image">
-<a href="{{ constant('ROOT')}}{{propiedad[0].imagen}}" class="theater" rel="group" hidefocus="true">
-<img src="{{ constant('ROOT')}}{{propiedad[0].imagen}}" class="img-responsive" alt="">
-</a>
-</div-->
-<ul>
-{% for publicacion in propiedad[0].imagenes %}
-    <li>
-<a animation="false" data-rel="tooltip" href="{{ constant('ROOT')}}{{ publicacion.imagen}}" class="theater" rel="group" hidefocus="true">
-<img src="{{ constant('ROOT')}}{{ publicacion.imagen}}" alt="">
-</a>
-<div class="overl"></div>
-    </li>
-{% endfor %}
-</ul>
+<img src="{{constant('ROOT')}}{{propiedad[0].imagen}}" alt="{{propiedad[0].descripcion}}"/>
+<div class="widget-2 widget velocitySocials" id="velocitysocials-4">
+<div class="footertitle"><h4>Compartir</h4></div>
+<div class="social">
+    <ul>
+        <li><a data-placement="bottom" data-animation="false" data-rel="tooltip" class="so_facebook" href="#" data-original-title="Facebook">
+                <div class="s_icon social-facebook"></div></a>
+        </li>
+        <li><a data-placement="bottom" data-animation="false" data-rel="tooltip" class="so_twitter" href="#" data-original-title="Twitter">
+                <div class="s_icon social-twitter"></div></a>
+        </li>
+        <li><a data-placement="bottom" data-animation="false" data-rel="tooltip" class="so_gplus" href="#" data-original-title="Google+">
+                <div class="s_icon social-gplus"></div></a>
+        </li>
+    </ul>
+</div><div class="clear"></div></div>
 </div>
 
-</div>
-</div>
-</div></div>
 <div class="wpb_column vc_column_container vc_col-sm-6">
 	<div class="wpb_text_column wpb_content_element ">
 			<div class="footertitle">
@@ -83,10 +73,18 @@ Ha ocurrido un error durante el proceso y no podemos mostrar la información de 
 <h4 class="content-title">{{propiedad[0].Tipo}}, {{propiedad[0].operacion}}</h4>
 <!--p class="description mb-15">{{propiedad[0].descripcion}}</p-->
 <div class="">
-<a class="btn btn-b-dark" href="#">(0212)735 1320 &bullet; (0414)262 4817 </a>
+<a class="btn btn-b-dark" href="#"><i class="fa fa-phone"></i> (0212)735 1320 &bullet; (0414)262 4817 </i></a>
 </div>
+<br />
+<section class="gallery-images">
+<img src="{{constant('ROOT')}}{{propiedad[0].imagen}}" alt=""/>
+{% for publicacion in propiedad[0].imagenes %}
+    <img src="{{constant('ROOT')}}{{publicacion.imagen}}" alt=""/>
+{% endfor %}
+</section>
 <br/>
 </div>
+
 <div class="vc_row wpb_row vc_inner vc_row-fluid bottom0"><div class="wpb_column vc_column_container vc_col-sm-2"><div class="wpb_wrapper"><div data-pie-color="#ff675b" data-pie-units="" data-pie-label-value="{{propiedad[0].mts2}}" data-pie-value="75" class="vc_pie_chart wpb_content_element bottom0 vc_ready"><div class="wpb_wrapper"><div class="vc_pie_wrapper" style="width: 216px;"><span style="border-color: rgb(255, 103, 91); width: 216px; height: 216px;" class="vc_pie_chart_back"></span><span class="vc_pie_chart_value" style="width: 216px; height: 216px; line-height: 216px;">34973</span><canvas height="216px" width="216px"></canvas></div><h4 class="wpb_heading wpb_pie_chart_heading">Mts2</h4></div></div>
 	<div class="wpb_text_column wpb_content_element  centered">
 		
@@ -103,24 +101,10 @@ Ha ocurrido un error durante el proceso y no podemos mostrar la información de 
 	<div class="wpb_text_column wpb_content_element  centered">
 	</div>
 </div></div></div>
-<div class="widget-2 widget velocitySocials" id="velocitysocials-4">
-    <div class="footertitle"><h4>Compartir</h4></div>
-    <div class="social">
-        <ul>
-            <li><a data-placement="bottom" data-animation="false" data-rel="tooltip" class="so_facebook" href="#" data-original-title="Facebook">
-                    <div class="s_icon social-facebook"></div></a>
-            </li>
-            <li><a data-placement="bottom" data-animation="false" data-rel="tooltip" class="so_twitter" href="#" data-original-title="Twitter">
-                    <div class="s_icon social-twitter"></div></a>
-            </li>
-            <li><a data-placement="bottom" data-animation="false" data-rel="tooltip" class="so_gplus" href="#" data-original-title="Google+">
-                    <div class="s_icon social-gplus"></div></a>
-            </li>
-        </ul>
-    </div><div class="clear"></div></div>
-    <br/>
-<p><a class="btn btn-sm btn-alt btn-icon btn-icon-right fa-envelope" data-target="#loginModal" data-toggle="modal" href="#"><span>Enviar por email</span></a></p>
-<p><a class="btn btn-light link-back" href="#"><i class="fa fa-arrow-left"></i> Regresar al listado</a></p>
+<div class="buttom-action-property">
+    <a class="btn btn-light" data-target="#loginModal" data-toggle="modal" href="#"><i class="fa fa-envelope"></i> Enviar por email</a>
+    <a class="btn btn-light link-back" href="#"><i class="fa fa-arrow-left"></i> Regresar al listado</a>
+</div>
 </div>
 </div>
 	</div>
@@ -144,16 +128,13 @@ Ha ocurrido un error durante el proceso y no podemos mostrar la información de 
 <textarea class="form-control" style="height:100px;" name="mensaje">Estoy interesado en esta propiedad y requiero mayor información. Saludos</textarea>
 <div class="row">
 </div>
-<button type="submit" class="btn btn-base btn-icon btn-icon-right btn-send">
-<span>Enviar</span>
-</button>
+<button type="submit" class="btn btn-base btn-icon btn-icon-right btn-send"><i class="fa fa-send"></i> Enviar</i></button>
 </form>
 <div id="dialog-contacto-resultado" class="alert"></div>
 </div>
-
 </div>
-	</div>
-    </div></div>
+</div>
+</div></div>
 </div>
 </section>
 <div class="wpb_wrapper pagewrapright">
@@ -212,23 +193,21 @@ Ha ocurrido un error durante el proceso y no podemos mostrar la información de 
 <h2>Compartir con un amigo</h2>
 </div>
 <div class="form-body">
-<form method="POST" action="#" id="frmCompartir" class="sky-form">
+<form method="POST" action="#" id="frmCompartir">
 <fieldset>
 <section>
 <div class="form-group">
 <label class="input">
-<i class="icon-append fa fa-user"></i>
-<input type="hidden" name="url" value="{{url}}">
-<input type="hidden" name="titulo" value="{{propiedad[0].titulo}}">
-<input type="text" class="required" name="de" placeholder="Escriba su nombre aquí">
+    <input type="hidden" name="url" value="{{url}}">
+    <input type="hidden" name="titulo" value="{{propiedad[0].titulo}}">
+    <input type="text" class="required" name="de" placeholder="Escriba su nombre aquí">
 </label>
 </div>     
 </section>
 <section>
 <div class="form-group">
 <label class="input">
-<i class="icon-append fa fa-envelope"></i>
-<input type="text" class="required email" name="email" placeholder="Escriba el correo electrónico del destinatario">
+    <input type="text" class="required email form-control" name="email" placeholder="Escriba el correo electrónico del destinatario">
 </label>
 </div>     
 </section> 

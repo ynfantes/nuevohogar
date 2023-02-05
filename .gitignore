@@ -7,3 +7,5 @@
 /enlinea/prerecibo/*.pdf
 .htaccess
 /node_modules
+/images/prv/estate/*.jpeg
+/images/prv/estate/*.jpg

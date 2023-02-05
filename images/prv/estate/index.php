@@ -25,11 +25,12 @@ if (!empty($_FILES)) {
                 $files[] = basename($imagen['imagen']);
             }
         }
-        $result  = array();
- 
+        $result  = [];
+        $path = getcwd();
+
         if ( false!==$files ) {
             foreach ( $files as $file ) {
-                if ( '.'!=$file && '..'!=$file) {       //2
+                if ( '.'!=$file && '..'!=$file && file_exists($path.'/'.$file)) {       //2
                     $obj['name'] = $file;
                     $obj['size'] = filesize($file);
                     $result[] = $obj;

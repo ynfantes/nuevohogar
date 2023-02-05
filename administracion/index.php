@@ -131,7 +131,7 @@ switch ($accion) {
                 $imagenes = $publicaciones->obtenerImagenesPorPublicacion($propiedad['data'][$index]['id']);
                 $propiedad['data'][$index]['imagenes'] = $imagenes['data'];
             }
-            $publicaciones->actualizar($_GET['id'], Array("visto" => $propiedad['data'][0]['visto'] + 1));
+            $publicaciones->actualizar($_GET['id'], ["visto" => $propiedad['data'][0]['visto'] + 1]);
         }
         $opciones = [
             'municipios'  => $municipios['data'],

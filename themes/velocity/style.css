@@ -3449,3 +3449,21 @@ em.invalid {
     margin-top:-10px;
     font-size:0.9em;
 }
+
+section.gallery-images {
+	display: flex;
+	width: 70%;
+}
+section.gallery-images img {
+	width: 0px;
+	flex-grow: 1;
+	object-fit: cover;
+	opacity: .8;
+	transition: .5s ease;
+}
+section.gallery-images img:hover {
+	cursor: pointer;
+	width: 66.6666%;
+	opacity: 1;
+	filter: contrast(120%);
+}
