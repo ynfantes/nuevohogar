@@ -60,7 +60,7 @@ switch ($accion) {
             die($route);
             move_uploaded_file($_FILES['file']['tmp'],$route);
         }
-        die('fin');
+        
         if (isset($data['imagen'])) {
             $imagenes = $data['imagen'];
             unset($data['imagen']);
