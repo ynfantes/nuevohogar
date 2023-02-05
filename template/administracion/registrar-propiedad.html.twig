@@ -207,7 +207,7 @@
 {% endblock %}
 {% block js %}
 {{parent()}}
-<script src="{{ constant('ROOT') }}assets/dropzone/js/dropzone.js"></script>
+<script src="{{constant('ROOT')}}assets/dropzone/js/dropzone.js"></script>
 <script type="text/javascript">
 var previewNode = document.querySelector("#template");
 previewNode.id = "";
@@ -217,12 +217,12 @@ previewNode.parentNode.removeChild(previewNode);
 var myDropzone = new Dropzone(document.body, {
     url: "{{constant('ROOT')}}images/prv/estate/index.php",
     previewsContainer: "#previews",
-    maxFilesize: 2,
-    /*maxFiles:10,*/
+    maxFilesize: 1,
+    maxFiles:5,
     acceptedFiles:"image/*",
     paramName:"file",
-    /*addRemoveLinks: true ,
-    dictRemoveFile: "Eliminar imagen",*/
+    addRemoveLinks: true ,
+    dictRemoveFile: "Eliminar",
     init:function() {
         jQuery.getJSON('{{constant('ROOT')}}images/prv/estate/index.php?id={{propiedad[0].id}}', function(data) {
             jQuery.each(data, function(index, val) {
@@ -248,6 +248,12 @@ myDropzone.on("addedfile", function(file) {
         myDropzone.removeFile(file);
   });
 });
+myDropzone.on('removedfile', function(image) {
+    jQuery.getJSON("{{constant('ROOT')}}images/prv/estate/deleteimage.php?name=" + image.name, function(resp) {
+        console.log(resp.message, resp.image);
+    });
+});
+
 jQuery(function($) {
     jQuery(document).on('click', '.form-footer > p > a[data-target]', function(e) {
         e.preventDefault();
