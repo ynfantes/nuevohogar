@@ -12,6 +12,34 @@ Cancelación de Gastos
 <!-- col -->
 <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
 <!-- sparks -->
+<ul id="sparks">
+{% set cobranza = 0 %}
+{% for p in propiedades %}
+{% if p.meses_pendiente > constant('MESES_COBRANZA') %}
+{% set cobranza = 1 %}
+{% endif %}
+{% endfor %}
+{% if cobranza == 0 %}    
+    <li class="sparks-info">
+    <h5> Mi Deuda
+    <span class="txt-color-blue">
+        {% set total = 0 %}
+        {% set inm = 0 %}
+        {% for c in cuentas %}
+            {% set inm = inm + 1 %}
+            {% for f in c %}
+                {% set total = total + f.deuda_total %}
+            {% endfor %}
+        {% endfor %}
+        {{ format_number(total) }}
+    </span>
+    </h5>
+    </li>
+    <li class="sparks-info">
+    <h5> Mis Inmuebles <span class="txt-color-greenDark"><i class="fa fa-building-o"></i>&nbsp;{{ inm }}</span></h5>
+    </li>
+{% endif %}
+</ul>
 <!-- end sparks -->
 </div>
 <!-- end col -->
@@ -29,7 +57,7 @@ data-widget-fullscreenbutton="false"
 data-widget-custombutton="false" >
 <header role="heading">
 <span class="widget-icon"> <i class="fa fa-building-o"></i> </span>
-<h3 class="font-md">{{ cuenta.inmueble.nombre_inmueble }} - {{ cuenta.propiedades.apto }}</h3>
+<h3 class="font-md">{{cuenta.inmueble.nombre_inmueble}} - {{cuenta.propiedades.apto}}</h3>
 </header>
 <div role="content">
 <!-- widget edit box -->
@@ -50,15 +78,15 @@ data-widget-custombutton="false" >
             <th style="text-align: center">Local</th>
             <th style="text-align: center">Deuda Inmueble </th>
             <th style="text-align: center">Fondo de Reserva</th>
-            <th style="text-align: center">Deuda Condominio</th>
+            <th style="text-align: center">Deuda Propietario</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td style="text-align: center">{{ cuenta.propiedades.apto }}</td>
-            <td><span class="pull-right">{{ format_number(cuenta.inmueble.deuda) }}</span></td>
-            <td><span class="pull-right">{{ format_number(cuenta.inmueble.fondo_reserva) }}</span></td>
-            <td><span class="pull-right">{{ format_number(cuenta.propiedades.deuda_total) }}</span></td>
+            <td style="text-align: center">{{cuenta.propiedades.apto}}</td>
+            <td><span class="pull-right">{{format_number(cuenta.inmueble.deuda)}}</span></td>
+            <td><span class="pull-right">{{format_number(cuenta.inmueble.fondo_reserva)}}</span></td>
+            <td><span class="pull-right">{{format_number(cuenta.propiedades.deuda_total)}}</span></td>
         </tr>
     </tbody>
 </table>
