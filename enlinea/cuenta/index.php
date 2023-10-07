@@ -11,7 +11,6 @@ $inmuebles = new inmueble();
 $propiedad = new propiedades();
 $bitacora = new bitacora();
 
-// <editor-fold defaultstate="collapsed" desc="promedio facturacion">
 
 $factura = null;
 $cobro = null;
@@ -61,11 +60,11 @@ if ($propiedades['suceed']) {
         
     }
     
-}// </editor-fold>
+}
 
 switch ($accion) {
     
-    // <editor-fold defaultstate="collapsed" desc="listar">
+    
     case "listar":
     default :
         
@@ -73,42 +72,51 @@ switch ($accion) {
 
         $propiedades = $propiedad->propiedadesPropietario($_SESSION['usuario']['cedula']);
 
-        $cuenta = Array();
+        $cuenta = [];
 
         if ($propiedades['suceed'] == true) {
 
 
             foreach ($propiedades['data'] as $propiedad) {
 
-                $bitacora->insertar(Array(
-                    "id_sesion"=>$session['id_sesion'],
-                    "id_accion"=>1,
-                    "descripcion"=>$propiedad['id_inmueble']." - ".$propiedad['apto'],
-                ));
+                $data = [
+                    'id_sesion'   => $session['id_sesion'],
+                    'id_accion'   => 1,
+                    'descripcion' => $propiedad['id_inmueble']." - ".$propiedad['apto'],
+                ];
+
+                $bitacora->insertar($data);
                 
                 $inmueble = $inmuebles->ver($propiedad['id_inmueble']);
                 $f = $facturas->estadoDeCuenta($propiedad['id_inmueble'], $propiedad['apto']);
                 
                 if ($f['suceed'] == true) {
-                        for ($index = 0; $index < count($f['data']); $index++) {
-                            $filename = "../avisos/" . $f['data'][$index]['numero_factura'] . ".pdf";
-                            $f['data'][$index]['aviso'] = file_exists($filename);
-                        }
-                    $cuenta[] = Array("inmueble" => $inmueble['data'][0],
-                        "propiedades" => $propiedad,
-                        "cuentas" => $f['data']);
+                    
+                    for ($index = 0; $index < count($f['data']); $index++) {
+                        $filename = "../avisos/" . $f['data'][$index]['numero_factura'] . ".pdf";
+                        $f['data'][$index]['aviso'] = file_exists($filename);
+                    }
+
+                    $cuenta[] = [
+                        'inmueble'    => $inmueble['data'][0],
+                        'propiedades' => $propiedad,
+                        'cuentas'     => $f['data']
+                    ];
                 }
             }
         }
-        echo $twig->render('enlinea/cuenta/formulario.html.twig', array("session" => $session,
-            "cuentas" => $cuenta,
-            "movimiento_facturacion" => $factura,
-            "promedio_facturacion" => $promedio_facturacion,
-            "direccion_facturacion" => $direccion_facturacion,
-            "promedio_cobranza" => $promedio_cobranza,
-            "direccion_cobranza" => $direccion_cobranza
-        ));
 
+        $options = [
+            'session'                => $session,
+            'cuentas'                => $cuenta,
+            'movimiento_facturacion' => $factura,
+            'promedio_facturacion'   => $promedio_facturacion,
+            'direccion_facturacion'  => $direccion_facturacion,
+            'promedio_cobranza'      => $promedio_cobranza,
+            'direccion_cobranza'     => $direccion_cobranza
+        ];
 
-        break; // </editor-fold>        
+        echo $twig->render('enlinea/cuenta/formulario.html.twig', $options );
+
+        break; 
 }

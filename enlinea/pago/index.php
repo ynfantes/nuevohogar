@@ -12,7 +12,6 @@ $accion = isset($_GET['accion']) ? $_GET['accion'] : "listar";
 
 switch ($accion) {
     
-    // <editor-fold defaultstate="collapsed" desc="cancelacion">
     case "cancelacion":
         $titulo = $_GET['id'] . ".pdf";
         $content = 'Content-type: application/pdf';
@@ -21,9 +20,7 @@ switch ($accion) {
         header($content);
         readfile($url,false);
         break;
-    // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="ver">
     case "ver":
         $propiedad = new propiedades();
         $inmuebles = new inmueble();
@@ -67,7 +64,6 @@ switch ($accion) {
 
         break; // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="guardar">
     case "guardar":
         $pago = new pago();
         $data = $_POST;
@@ -88,29 +84,29 @@ switch ($accion) {
         echo json_encode($exito);
         
         break;
-    // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="registrar">
-        case "registrar":
-        case "listar":
-        default :
+    case "registrar":
+    case "listar":
+    default :
         $propiedad = new propiedades();
-        $facturas = new factura();
+        $facturas  = new factura();
         $inmuebles = new inmueble();
-        $resultado = Array();
+        $resultado = [];
+        $cuenta    = [];
+
         if ($accion == 'guardar') {
             $resultado = $exito;
         }
         
         $propiedades = $propiedad->propiedadesPropietario($_SESSION['usuario']['cedula']);
 
-        $cuenta = Array();
-        
-        $bitacora->insertar(Array(
-            "id_sesion"=>$session['id_sesion'],
-            "id_accion"=> 8,
-            "descripcion"=>'Inicio del proceso',
-        ));
+        $data = [
+            'id_sesion'     => $session['id_sesion'],
+            'id_accion'     => 8,
+            'descripcion'   => 'Inicio del proceso',
+        ];
+
+        $bitacora->insertar($data);
         
         if ($propiedades['suceed'] == true) {
 
@@ -142,26 +138,27 @@ switch ($accion) {
                         }
                     }
                     
-                    $cuenta[] = Array(
-                            "inmueble" => $inmueble['data'][0],
-                            "propiedades" => $propiedad,
-                            "cuentas" => $factura['data'],
-                            "resultado" => $resultado
-                            );
+                    $cuenta[] = [
+                        'inmueble'    => $inmueble['data'][0],
+                        'propiedades' => $propiedad,
+                        'cuentas'     => $factura['data'],
+                        'resultado'   => $resultado
+                    ];
                 }
             }
         }
-        //var_dump($propiedades['data']);
-        echo $twig->render('enlinea/pago/formulario.html.twig', array("session" => $session,
-        "cuentas" => $cuenta,
-        "accion" => $accion,
-        "usuario"=>$session['usuario'],
-        "propiedades"=>$propiedades['data']
-        ));
-        break; 
-// </editor-fold>
+        
+        $options = [
+            'session'     => $session,
+            'cuentas'     => $cuenta,
+            'accion'      => $accion,
+            'usuario'     => $session['usuario'],
+            'propiedades' => $propiedades['data']
+        ];
 
-    // <editor-fold defaultstate="collapsed" desc="listaPagoDetalle">
+        echo $twig->render('enlinea/pago/formulario.html.twig', $options );
+        break; 
+
     case "listaPagosDetalle":
         $pagos = new pago();
         $pago_detalle = $pagos->detalleTodosPagosPendientes();
@@ -177,9 +174,7 @@ switch ($accion) {
             }
         }
         break; 
-// </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="listaPagosMaestros">
     case "listaPagosMaestros":
         $pagos = new pago();
         $pagos_maestro = $pagos->listarPagosPendientes();
@@ -206,9 +201,7 @@ switch ($accion) {
             }
         }
         break; 
-// </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="listaPagosPendientes">
     case "listarPagosPendientes":
         $pagos = new pago();
         $pagos_maestro = $pagos->listarPagosPendientes();
@@ -256,7 +249,6 @@ switch ($accion) {
 
         break; // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="confirmación de pago">
     case "confirmar":
 
         $pago = new pago();
@@ -266,14 +258,12 @@ switch ($accion) {
         echo $r;
         break; // </editor-fold>
    
-    // <editor-fold defaultstate="collapsed" desc="reenviar email registro pago">
     case "reenviarEmailRegistroPago":
         $pago = new pago();
         $id = $_GET['id'];
         $pago->enviarEmailPagoRegistrado($id);
-        break; // </editor-fold>
+        break; 
     
-    // <editor-fold defaultstate="collapsed" desc="lista recibos no publicados">
     case "listaRecibosCanceladosNoPublicados":
         $pagos = new pago();
         $pago = $pagos->listarPagosProcesadosWeb();
@@ -283,6 +273,7 @@ switch ($accion) {
             $i = 0;
             $apto='';
             foreach ($pago['data'] as $r) {
+                
                 $filename = "../../cancelacion.gastos/" . $r['id_factura'] . ".pdf";
                 
                 if (!file_exists($filename)) {
@@ -297,12 +288,9 @@ switch ($accion) {
                     }
                 }
             }
-            //echo "Total Recibos: " . $n;
         }
         break; 
-    // </editor-fold>
         
-    // <editor-fold defaultstate="collapsed" desc="Pagos procesados general">
     case "listarPagosProcesadosGeneral":
         $pagos = new pago();
         $desde = null;
@@ -353,7 +341,6 @@ switch ($accion) {
             echo "0";
         }
         break; 
-    // </editor-fold>
     
     case "enviarEmailRegistroPagoNoEnviado":
         $pago = new pago();
